@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/css/style.css">
+  <link rel="shortcut icon" href="./icon/logo-foxminded.svg" type="image/x-icon">
+  <script src="./script/index.js" type="module" defer></script>
+  <title>task2_6</title>
+</head>
+<body>
+
+  <section class="list">
+    <div class="list__container">
+
+      <form class="list__form" id="list-form">
+  
+        <textarea 
+          id="text-input" 
+          autofocus placeholder="Type here to add a task..."
+          rows="1"
+        ></textarea>
+
+        <span class="list__error"></span>
+        <button type="submit" id="btn-add">Add</button>
+
+      </form>
+
+      <ul class="list__tasks"></ul>
+    </div>
+
+    <div class="list__footer">
+      
+    <button 
+      type="reset" 
+      id="clear-all-tasks"
+    >
+      Clear all tasks
+    </button>
+
+    </div>
+  </section>
+
+</body>
+</html>

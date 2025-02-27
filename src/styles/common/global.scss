@@ -1,0 +1,32 @@
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+body {
+  margin: 10px;
+  color: $gray;
+  background-color: $aquaish;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+body, input, textarea, button, h1, span {
+  @include font-style(400, 15px, 20px);
+}
+
+input, button, label {
+  @extend %mouse-pointer;
+}
+
+.active-icon::before {
+  @extend %animation-rotate-left;
+
+  visibility: visible;
+}

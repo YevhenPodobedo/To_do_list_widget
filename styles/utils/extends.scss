@@ -1,0 +1,39 @@
+%mouse-pointer {
+  cursor: url('../../icon/mouse_pointer.svg'), pointer;
+};
+
+%active-click {
+  transform: translate(4px, 4px);
+}
+
+%animation-rotate-right {
+  animation-name: rotate-right;
+  animation-duration: 1s;
+  animation-direction:normal;
+  animation-iteration-count: infinite;
+
+  @keyframes rotate-right {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } 
+}
+
+%animation-rotate-left {
+  animation-name: rotate-left;
+  animation-duration: 1s;
+  animation-direction:normal;
+  animation-iteration-count: infinite;
+
+  @keyframes rotate-left {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  } 
+}

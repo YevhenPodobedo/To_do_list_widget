@@ -1,0 +1,334 @@
+.list {
+  @include flex(column, 30px);
+
+  transition: $speed-main;
+
+  &__container {
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: $background-shadow;
+  }
+
+  &__form {
+    @include flex(row, 10px) {
+      align-items: center;
+    };
+
+    position: relative;
+    transition: 1s;
+    
+    padding: 10px 24px;
+    box-shadow: $background-shadow;
+
+    & > textarea {
+      flex-grow: 1;
+      overflow-wrap: break-word;
+    }
+
+    & > button {
+      @include flex(row, 5px) {
+        align-items: center;
+      };
+
+      width: 80px;
+      height: 36px;
+      border: none;
+      border-radius: 8px;
+
+      color: $white;
+      background-color: $green;
+      
+      &:active {
+        @extend %active-click;
+      }
+      
+      &::before {
+        content: "";
+
+        width: 20px;
+        height: 20px;
+
+        background-image: url(../../icon/plus.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+  }
+
+  &__error {
+    position: absolute;
+    right: 108px;
+
+    opacity: 0;
+    max-width: 0;
+    height: 20px;
+    transition: max-width $speed-main ease-in-out, opacity $speed-btn ease-in-out;
+
+    font-style: italic;
+    padding: 0 3px;
+    border-radius: 8px;
+
+    color: $white;
+    background-color: $green;
+
+    &--active {
+      max-width: 1000px;
+      opacity: 1;
+    }
+  }
+
+  &__tasks {
+    @include flex(column, 20px); 
+
+    opacity: 1;
+    overflow: hidden;
+    margin: 16px 16px 36px;
+    padding: 4px;
+    transition: $speed-main;
+    
+    &--empty {
+      opacity: 0;
+    }
+  }
+
+  &__footer {
+    @include flex(row, 20px);
+    background-color: $aquaish;
+
+    & > button {
+      @include flex(row, 10px) {
+        align-items: center;
+      };
+      
+      width: 300px;
+      height: 36px;
+
+      transition: $speed-btn;
+      border: 1px solid $light-gray;
+      border-radius: 8px;
+
+      background-color: $white;
+      box-shadow:  0px 2px 2px 0px #1018280d;
+      
+      &:active {
+        @extend %active-click;
+        box-shadow:  0 0 0 #1018280d;
+      }
+
+      &::before {
+        content: "";
+
+        width: 20px;
+        height: 20px;
+
+        background-image: url(../../icon/basket.svg);
+        background-position: center;
+        background-size: cover;
+      }
+    }
+
+    .active-icon::before {
+      @extend %animation-rotate-left
+    }
+  }
+};
+
+.task {
+  @include flex(row, 20px);
+  
+  opacity: 0;
+  padding: 16px;
+  transition: $speed-btn;
+  
+  border: 1px solid $light-gray;
+  box-shadow: $shadow-task;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: $grayish;
+
+    .task__navigaion {
+      visibility: visible;
+    }
+  }
+
+  &:not(:last-child) {
+    opacity: 1;
+  }
+
+  &--color {
+    background-color: $grayish;
+  }
+ 
+  &--active {
+    @extend %active-click;
+    box-shadow: none;
+  }
+  
+  &--active-edit {
+    @extend %active-click;
+    box-shadow: none;
+
+    &:hover {
+      background-color: unset;
+    }
+
+    .task__checkbox {
+      pointer-events: none;
+    }
+
+    .task__content {
+      max-height: 1000px;
+    }
+
+    .task__navigaion {
+
+      #btn-save {
+        @include visibilityElement(visible, 1.6s);
+      }
+      
+      #btn-edit {
+        @include visibilityElement(hidden, 1.2s);
+      }
+      
+      #btn-remove {
+        @include visibilityElement(hidden, 1s);
+      }
+    }
+  }
+
+  &__checkbox {
+    
+    & > label {
+      position: relative;
+      display: inline-block;
+      
+      width: 16px;
+      height: 16px;
+  
+      background-color: transparent;
+      border: 1px solid $gray;
+      border-radius: 3px;
+
+      & > span {
+        position: absolute;
+        inset: -1px;
+        opacity: 0;
+        transition: $speed-main;
+        
+        background-image: url(../../icon/check-mark.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+    }
+    
+    input[name="checkbox"] {
+      appearance: none;
+      
+      &:checked + span {
+        opacity: 1;
+      }
+    }
+  }
+  
+  &__content {
+    @extend %mouse-pointer;
+
+    flex-grow: 1;
+    overflow: hidden;
+    max-height: 20px;
+    transition: max-height $speed-main, visibility $speed-main ease-in-out;
+    
+    padding: 0 4px 0 20px;
+    border-left: 2px solid $light-gray;
+
+
+    &--active {
+      max-height: 1000px;
+    }
+    
+    &--change {
+      text-decoration: line-through;
+    }
+
+    & > textarea {
+      cursor: text;
+      width: 96%;
+      overflow: hidden;
+
+      border-radius: 8px;
+      border: 2px solid $light-gray;
+      box-shadow: $shadow-task;
+    }
+  }
+
+  &__title--hidden {
+    visibility: hidden;
+  }
+
+  &__navigaion {
+    @include flex(row, 10px);
+    visibility: hidden;
+
+    & > button {
+      width: 20px;
+      height: 20px;
+      transition: $speed-btn;
+      border: none;
+      border-radius: 4px;
+      background-color: transparent;
+      
+      
+      &:active {
+        @extend %active-click;
+      }
+      
+      &::before {
+        content: "";
+        display: block;
+        
+        width: inherit;
+        height: inherit;
+        
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+    }
+
+    #btn-save {
+      visibility: hidden;
+      
+      &::before {
+        background-image: url(../../icon/checkbox.svg);
+      }
+
+      &:hover {
+        transition: 100ms;
+        background-color: $light-gray;
+        transform: scale(1.2);
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+    }
+
+    #btn-edit {
+      @include visibilityElement(visible, 0.4s);
+
+      &::before {
+        background-image: url(../../icon/pen.svg);
+      }
+    }
+
+    #btn-remove {
+      @include visibilityElement(visible, 0.6s);
+
+      &::before {
+        background-image: url(../../icon/basket.svg);
+      }
+    }
+  }
+}
